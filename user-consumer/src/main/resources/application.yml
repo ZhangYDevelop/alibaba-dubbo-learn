@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: user-service-boot
+  cloud:
+    zookeeper:
+      discovery:
+        register: false
+      connect-string: 192.168.1.102:2181
+server:
+  port: 8099
+

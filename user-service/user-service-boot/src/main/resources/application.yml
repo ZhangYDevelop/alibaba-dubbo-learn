@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: user-service-boot
+dubbo:
+  application:
+    name: dubbo-user-service-boot
+  protocol:
+    name: dubbo
+    port: 20880
+  registry:
+    address: zookeeper://192.168.1.102:2181
+server:
+  port: 8099
