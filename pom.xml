@@ -18,7 +18,7 @@
         <dubbo-spring-boot-starter.version>0.2.0</dubbo-spring-boot-starter.version>
         <user-api.version>1.0-SNAPSHOT</user-api.version>
         <curator-recipes.version>4.2.0</curator-recipes.version>
-        <zookeeper.version>3.5.4-beta</zookeeper.version>
+        <zookeeper.version>3.5.5</zookeeper.version>
         <curator-framework.version>4.2.0</curator-framework.version>
         <dubbo.version>2.7.3</dubbo.version>
         <spring-cloud-starter-alibaba-nacos-config.version>2.1.0.RELEASE</spring-cloud-starter-alibaba-nacos-config.version>
