@@ -12,7 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @EnableDubbo
 public class UserServiceBootApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(UserServiceBootApplication.class,args);
     }
