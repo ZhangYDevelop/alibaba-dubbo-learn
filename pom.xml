@@ -9,9 +9,9 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>user-service</module>
-        <module>user-service-consumer</module>
-        <module>user-api</module>
+        <module>dubbo-service-provider</module>
+        <module>dubbo-api</module>
+        <module>dubbo-service-consumer</module>
     </modules>
 
     <properties>
