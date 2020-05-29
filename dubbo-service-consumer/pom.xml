@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>dubbo-service-consumer-cloud</module>
+        <module>dubbo-service-consumer-xml</module>
     </modules>
 
 </project>
