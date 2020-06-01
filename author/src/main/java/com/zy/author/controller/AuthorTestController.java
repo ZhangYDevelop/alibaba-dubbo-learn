@@ -7,8 +7,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/author/test")
 public class AuthorTestController {
 
-    @RequestMapping("/chekc")
+    @RequestMapping("/token")
     public String getStr() {
-        return "hello app";
+        return "hello this api need token";
+    }
+
+    @RequestMapping("/noToken")
+    public String getStrq() {
+        return "hello no token";
     }
 }

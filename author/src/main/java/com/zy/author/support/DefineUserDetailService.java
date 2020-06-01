@@ -20,6 +20,7 @@ public class DefineUserDetailService implements UserDetailsService {
     @Autowired
     private UserMapper userMapper;
 
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = userMapper.getUserByUserName(username);

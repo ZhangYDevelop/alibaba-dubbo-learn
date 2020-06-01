@@ -32,10 +32,6 @@ public class AuthenticationServiceConfig extends AuthorizationServerConfigurerAd
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @PostConstruct
-    public void init(){
-        System.out.println("init ....");
-    }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
