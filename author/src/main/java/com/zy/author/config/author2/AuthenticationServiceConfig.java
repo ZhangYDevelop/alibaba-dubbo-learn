@@ -1,24 +1,19 @@
-package com.zy.author.config;
+package com.zy.author.config.author2;
 
+import com.zy.author.support.DefineUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
-import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.*;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
-import java.util.Arrays;
+import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
@@ -32,14 +27,20 @@ public class AuthenticationServiceConfig extends AuthorizationServerConfigurerAd
     private TokenStore tokenStore;
 
     @Autowired
-    private ClientDetailsService clientDetailsService;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private JwtAccessTokenConverter accessTokenConverter;
+    private UserDetailsService userDetailsService;
 
+    @PostConstruct
+    public void init(){
+        System.out.println("init ....");
+    }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        // 允许表单认证
+        security.allowFormAuthenticationForClients();
         security
                 // 开启/oauth/token_key验证端口无权限访问
                 .tokenKeyAccess("permitAll()")
@@ -48,20 +49,17 @@ public class AuthenticationServiceConfig extends AuthorizationServerConfigurerAd
                 .allowFormAuthenticationForClients();
     }
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // 配置客户端
-        clients.inMemory()
-                .withClient("webapp")
-                .scopes("all")
-                // 必须编码
-                .secret(passwordEncoder.encode("webapp"))
-                .autoApprove(true)
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
-                .redirectUris("http://www.baidu.com");
+        clients.inMemory()   // 基于内存
+                .withClient("client1")  //授权客户端
+                .secret(passwordEncoder.encode("admin"))  //授权码
+                .accessTokenValiditySeconds((int) TimeUnit.HOURS.toSeconds(1))  // 授权过期时间
+                .authorizedGrantTypes("password", "refresh_token")  // 授权模式
+                .scopes("app") ; // 授权范围
     }
 
 
@@ -72,22 +70,7 @@ public class AuthenticationServiceConfig extends AuthorizationServerConfigurerAd
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
-                .tokenServices(tokenServices());
-    }
-
-    private AuthorizationServerTokenServices tokenServices() {
-        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setClientDetailsService(clientDetailsService);
-        defaultTokenServices.setSupportRefreshToken(true);
-        defaultTokenServices.setTokenStore(tokenStore); // 支持token刷行
-
-        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain(); // 令牌增强
-        tokenEnhancerChain.setTokenEnhancers(Arrays.<TokenEnhancer>asList(accessTokenConverter));
-        defaultTokenServices.setTokenEnhancer(tokenEnhancerChain);
-
-        defaultTokenServices.setAccessTokenValiditySeconds(30*60); // 令牌有效时间
-        defaultTokenServices.setRefreshTokenValiditySeconds(10*60); // 令牌刷新时间
-
-        return defaultTokenServices;
+                .tokenStore(tokenStore)
+                .userDetailsService(userDetailsService);
     }
 }

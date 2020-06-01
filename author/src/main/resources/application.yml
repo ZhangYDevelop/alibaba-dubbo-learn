@@ -3,3 +3,19 @@ server:
 spring:
   application:
     name: author
+  security:
+    user:
+      name: admin
+      password: admin
+  datasource:
+      url: jdbc:mysql://localhost:3306/author?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Hongkong
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    host: 192.168.106.92
+    port: 6379
+
+
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
