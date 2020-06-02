@@ -1,5 +1,6 @@
 package com.zy.author.config.author2;
 
+import com.zy.author.support.DefineClientDetailsService;
 import com.zy.author.support.DefineUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +14,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.*;
 
-import javax.annotation.PostConstruct;
-import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableAuthorizationServer
@@ -27,10 +26,10 @@ public class AuthenticationServiceConfig extends AuthorizationServerConfigurerAd
     private TokenStore tokenStore;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private DefineUserDetailService userDetailsService;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private DefineClientDetailsService defineClientDetailsService;
 
 
     @Override
@@ -50,12 +49,14 @@ public class AuthenticationServiceConfig extends AuthorizationServerConfigurerAd
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // 配置客户端
-        clients.inMemory()   // 基于内存
-                .withClient("client1")  //授权客户端
-                .secret(passwordEncoder.encode("admin"))  //授权码
-                .accessTokenValiditySeconds((int) TimeUnit.HOURS.toSeconds(1))  // 授权过期时间
-                .authorizedGrantTypes("password", "refresh_token")  // 授权模式
-                .scopes("app") ; // 授权范围
+//        clients.inMemory()   // 基于内存
+//                .withClient("client1")  //授权客户端
+//                .secret(passwordEncoder.encode("admin"))  //授权码
+//                .accessTokenValiditySeconds((int) TimeUnit.HOURS.toSeconds(1))  // 授权过期时间
+//                .authorizedGrantTypes("password", "refresh_token")  // 授权模式
+//                .scopes("app") ; // 授权范围
+
+        clients.withClientDetails(defineClientDetailsService);
     }
 
 

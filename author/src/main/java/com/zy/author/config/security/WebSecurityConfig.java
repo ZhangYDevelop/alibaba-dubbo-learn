@@ -29,9 +29,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(userDetailsServices())
-                .passwordEncoder(passwordEncoder());
-    }
+            .userDetailsService(userDetailsServices())
+            .passwordEncoder(passwordEncoder());
+}
 
 
     @Override
@@ -44,14 +44,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .antMatchers("/oauth/**", "/logout").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/v2/api-docs").permitAll()
-                .antMatchers("/swagger-ui.html").permitAll()
-                .anyRequest().authenticated()
-                .and().formLogin();
+            .csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/oauth/**", "/logout").permitAll()
+            .antMatchers("/login").permitAll()
+            .antMatchers("/v2/api-docs").permitAll()
+            .antMatchers("/swagger-ui.html").permitAll()
+            .anyRequest().authenticated()
+            .and().formLogin();
     }
 }

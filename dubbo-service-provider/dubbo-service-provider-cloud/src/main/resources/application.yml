@@ -21,3 +21,10 @@ dubbo:
   consumer:
     #订阅的客户端不检查，dubbo在服务启动后，回去检查调用的Reference接口，检查失败，会导致启动不成功
     check: false
+
+security:
+  oauth2:
+    resource:
+      id: service
+      user-info-uri: http://localhost:8004/api/user/userInfo # 使用auth-server进行认证授权，
+      prefer-token-info: false
