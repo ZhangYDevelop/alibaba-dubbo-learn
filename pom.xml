@@ -34,7 +34,7 @@
         <curator-framework.version>4.2.0</curator-framework.version>
         <spring-cloud-starter-alibaba-nacos.version>2.1.2.RELEASE</spring-cloud-starter-alibaba-nacos.version>
         <spring-boot-starter-actuator.version>2.1.2.RELEASE</spring-boot-starter-actuator.version>
-        <httpclient.version>4.5.6</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <dubbo-api.version>1.0-SNAPSHOT</dubbo-api.version>
         <spring-cloud-starter-dubbo.version>2.1.2.RELEASE</spring-cloud-starter-dubbo.version>
         <spring-cloud-starter.version>2.1.2.RELEASE</spring-cloud-starter.version>
