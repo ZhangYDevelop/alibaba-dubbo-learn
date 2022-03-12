@@ -1,0 +1,29 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: user-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: www.mynacos.com:8848
+#        ip: www.mylocalhost.com
+
+dubbo:
+#  cloud:
+    #订阅的服务 默认订阅所有服务
+    #subscribed-services: user-service-provider,user-service-consumer
+  protocol:
+    port: 20885
+    name: dubbo
+  registry:
+      #将dubbo服务挂在到Springcloud，本案例中就是读取nacos中的服务
+      address: spring-cloud://localhost
+#      group: gate-way
+  application:
+#    qos-enable: false
+    id: user-service
+    name: user-service
+  consumer:
+    #订阅的客户端不检查，dubbo在服务启动后，回去检查调用的Reference接口，检查失败，会导致启动不成功
+    check: false
