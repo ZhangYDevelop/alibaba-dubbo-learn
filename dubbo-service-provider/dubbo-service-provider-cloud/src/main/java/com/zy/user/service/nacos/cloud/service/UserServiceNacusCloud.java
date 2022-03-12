@@ -1,8 +1,8 @@
 package com.zy.user.service.nacos.cloud.service;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.zy.dubbo.user.api.UserApi;
 import com.zy.dubbo.user.api.model.User;
+import org.apache.dubbo.config.annotation.Service;
 
 @Service
 @SuppressWarnings("all")

@@ -8,10 +8,12 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 
+import javax.annotation.Resource;
+
 @Configuration
 public class DefineClientDetailsService implements ClientDetailsService {
 
-    @Autowired
+    @Resource
     private ClientMapper clientMapper;
 
     @Override

@@ -12,6 +12,8 @@ public class UserService  {
     @Reference
     private UserApi userApi;
 
+    synchronized
+
     public User getUser() {
         return userApi.queryUserByUserId("dfdfd");
     }
