@@ -1,7 +1,9 @@
 package com.zy.alibaba.user.service;
 
 import com.zy.service.api.model.User;
+import com.zy.service.api.order.IOrderService;
 import com.zy.service.api.user.IUserService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 
 /**
@@ -10,6 +12,10 @@ import org.apache.dubbo.config.annotation.Service;
  */
 @Service
 public class UserService implements IUserService {
+
+    @Reference
+    private IOrderService orderService;
+
     public int insertUser(User user) {
         return 0;
     }

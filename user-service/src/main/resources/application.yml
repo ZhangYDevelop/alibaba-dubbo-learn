@@ -7,7 +7,7 @@ spring:
     nacos:
       discovery:
         server-addr: www.mynacos.com:8848
-#        ip: www.mylocalhost.com
+        group: spring-cloud-alibaba
 
 dubbo:
 #  cloud:
@@ -17,7 +17,7 @@ dubbo:
     port: 20885
     name: dubbo
   registry:
-      #将dubbo服务挂在到Springcloud，本案例中就是读取nacos中的服务
+      #将dubbo服务挂在到Springcloud 这册中心，本案例中就是读取nacos中的服务
       address: spring-cloud://localhost
 #      group: gate-way
   application:

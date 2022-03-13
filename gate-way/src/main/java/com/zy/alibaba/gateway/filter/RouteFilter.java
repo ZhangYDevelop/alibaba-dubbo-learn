@@ -31,8 +31,8 @@ public class RouteFilter implements GlobalFilter, Ordered {
 
     private List<String> noTokenUrl = Arrays.asList("/v2/api-docs", "/api/login");
 
-    @Value("${oauth2.authorization.check-token-access}")
-    private String checkTokenUrl;
+//    @Value("${oauth2.authorization.check-token-access}")
+//    private String checkTokenUrl;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
